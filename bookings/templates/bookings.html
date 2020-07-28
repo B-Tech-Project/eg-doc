@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    <title>Patient | Appointment booking</title>
+{% endblock %}
+{% load static %}
+{% block body %}
+    {% include 'navBar.html' %}
+    <div style="background: teal; background-image: url({% static 'images/doc-pat-ed.jpg' %}); width: 100%; height:100%; background-size: cover; background-position: center center;">
+        <div class="container" style="padding-top: 10px;">
+
+            <div class="row">
+                <div class="col m3 s10 teal" style="min-height: 100px; margin: 10px;">
+                    <h5 class="" style="color: white;padding:20px; display: flex;">Appointment Booking</h5>
+                </div>
+                <div class="card col s12 m8 center" style="margin:10px; padding:20px; min-height: 100px;">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col s10 m4">
+                                <label for="spclist">Specialist:</label>
+                                <input type="text" id="spclist" name="specialist" placeholder="Select Specialist..." list="spcs" required>
+                                <datalist id="spcs">
+                                    {% for spcls in spcs %}
+                                        <option value="{{spcls}}">{{spcls}}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                            <div class="col s12 m7 row">
+                            <div class="col s8 m6">
+                                <label for="city">City:</label>
+                                <input type="text" placeholder="Select city..." name="city" id="city" list="cities" required>
+                                <datalist id="cities">
+                                    {% for city in cities %}
+                                        <option value="{{city}}">{{city}}</option>
+                                    {% endfor %}
+                                </datalist>
+                            </div>
+                            <div class="col m6 s2">
+                                <button id="getLoc" type="button" class="btn waves-effect waves-light"><i class="material-icons">person_pin_circle</i>  Current City</button>
+                            </div>
+                            </div>
+                        </div>
+                        <button type="submit" id="search_doctors" name="search_doctors" class="btn waves-effect waves-light blue">Search Available Doctors</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="width:100%; padding-top: 0px; position: absolute; margin: 15px;">
+                <div class="card" style="padding: 0px 10px 20px 30px;  min-width: 700px; overflow-x: scroll; scroll-direction: horizontal;">
+                    {% if doctors %}
+                        <h3 style="color: blue; padding-top: 10px; font-weight:500; font-size: 18px;" class="center">Available Doctors in City:</h3>
+                        <div>
+                            <div class="row blue collapsible-heade center" style="padding:8px;">
+                                <!--div class="col s2 " style="font-weight: 500; color: white;">Email</div-->
+                                <div class="col s2 " style="font-weight: 500; color: white;">Name</div>
+                                <div class="col s2 " style="font-weight: 500; color: white;">Specialization</div>
+                                <div class="col s2 " style="font-weight: 500; color: white;">City</div>
+                                <div class="col s2 " style="font-weight: 500; color: white;">Local Address</div>
+                                <div class="col s2"></div>
+                            </div>
+                            <ul class="collapsible">
+                            {% for docs_bs in doctors %}
+                                <li class="center">
+                                    <div class="row collapsible-header teal">
+                                        <!--div class="col s2">{{ docs_bs.email }}</div-->
+                                        <div class="col s2">{{ docs_bs.name }}</div>
+                                        <div class="col s2">{{ docs_bs.specialization }}</div>
+                                        <div class="col s2">{{ docs_bs.city }}</div>
+                                        <div class="col s3">{{ docs_bs.address }}</div>
+                                        <div class="col s1 green"><i class="material-icons ">add_box</i></div>
+                                    </div>
+                                    <div id="confirm-booking" class="collapsible-body center">
+                                        <div class="row">
+                                            <form method="post">
+                                                {% csrf_token %}
+
+                                                <div class="col m3 s10">
+                                                    <input name="selected_date" placeholder="Select date.." type="text" class="datepicker" required>
+                                                </div>
+                                                <div class="col m3 s10">
+                                                    {% if time_slots %}
+                                                        <datalist id="time_slots">
+                                                            {% for slot in time_slots %}
+                                                                <option value="{{slot}}">{{slot}}</option>
+                                                            {% endfor %}
+                                                        </datalist>
+                                                    {% endif %}
+                                                    <input placeholder="Select time slot.." name="selected_time" type="text" list="time_slots" class="timepicker" required>
+                                                </div>
+                                                <div class="col m3 s10">
+                                                    <button class="btn waves-effect waves-light blue center" type="submit" id="confirm-booking-button" name="confirm-booking-button" value="{{docs_bs.email}}">Confirm Booking</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    {% else %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <h6  class="center" style="color: red; font-weight:500;">{{ message }}</h6>
+                            {% endfor %}
+                        {% else %}
+                            <h5 class="center">No Doctors Available</h5>
+                        {% endif %}
+                    {% endif %}
+                </div>
+        </div>
+    </div>
+<script>
+    var today = new Date();
+    var currDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var maxxDate = today.getFullYear()+'-'+(today.getMonth()+2)+'-'+(today.getDate());
+    //alert(maxxDate);
+    var city = document.getElementById('city');
+    var locationButton = document.getElementById('getLoc');
+    $("#getLoc").click(function(event)
+      {
+        event.preventDefault(); // cancel default behavior
+        getLocation();
+      });
+    $(document).ready(function(){
+        $('.datepicker').datepicker({
+            //setDefaultDate: true,
+            defaultDate: new Date(currDate),
+            yearRange: [today.getFullYear(), today.getFullYear()],
+            minDate: new Date(currDate),
+            maxDate: new Date(maxxDate),
+            format: "yyyy-mm-dd",
+            autoClose: true,
+        });
+        $('select').formSelect();
+        $('.collapsible').collapsible();
+    });
+
+    function getLocation(){
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        }else{
+            alert('Browser is not supporting GPS!!');
+        }
+    }
+    function showPosition(position){
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            var key = 'ab2f72df17f74dcabd4306a6a970c2a0'
+
+            var api_url = 'https://api.opencagedata.com/geocode/v1/json'
+
+            var request_url = api_url
+                + '?'
+                + 'key=' + key
+                + '&q=' + encodeURIComponent(lat + ',' + lng)
+                + '&pretty=1'
+                + '&no_annotations=1';
+
+
+            var request = new XMLHttpRequest();
+            request.open('GET', request_url, true);
+            request.onload = function() {
+                if (request.status == 200){
+                      // Success!
+                      var data = JSON.parse(request.responseText);
+                      console.log(data);
+                      if (data.results[0].components.village){
+                        city.value = (data.results[0].components.city);
+
+                      }
+                      else{
+                        city.value = (data.results[0].components.city);
+                      }
+                } else if (request.status <= 500){
+                      alert("unable to geocode! Response code: " + request.status);
+                      var data = JSON.parse(request.responseText);
+                      console.log(data.status.message);
+                } else {
+                  alert("server error");
+                }
+          };
+          request.send();
+    };
+    function showError(error){
+    console.log(error.code);
+        switch(error.code){
+            case error.PERMISSION_DENIED :
+                alert('Your location permission for this site is blocked');
+                break;
+            case error.POSITION_UNAVAILABLE :
+                alert('Your location data is not available');
+                break;
+            case error.TIMEOUT :
+                alert('Timeout !!!');
+                break;
+            case error.UNKNOWN_ERROR :
+                alert('Unknown error!!');
+                break;
+        }
+    };
+
+
+</script>
+{% endblock %}

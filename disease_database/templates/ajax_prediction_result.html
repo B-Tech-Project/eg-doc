@@ -1,0 +1,29 @@
+{% if messages %}
+
+    {% for message in messages %}
+        {% if message.success %}
+            <h6>Status:<i style="color:teal;">{{ message }}</i></h6>
+        {% else %}
+            <h6>Status:<i style="color:teal;">{{ message }}</i></h6>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% if predictions %}
+    {% for disease, accuracy in predictions.items %}
+    <div class="diseaseCard row" style="">
+        <div class="col m12 s12 white z-index-3">
+            <h5 class="col m5">{{disease}}</h5><p class="col m6">Accuracy: {{accuracy}}%</p>
+            <span class="disease_info_btn" title="More About Disease" style="cursor: pointer;" id="{{disease}}"><i class="material-icons blue-text" style="padding: 14px 0px 10px 0px;">arrow_forward_ios</i></span>
+        </div>
+    </div>
+
+    {% endfor %}
+    <script>
+        $(document).ready(function(){
+            $('.disease_info_btn').click(function(){
+                getDiseaseInfo(this.id);
+            });
+        });
+    </script>
+{% endif %}

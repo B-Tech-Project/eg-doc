@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    <title>Patient | Appointments</title>
+    <style type="text/css">
+        .main_body{
+             margin:0px 50px 10px 50px;
+        }
+        @media only screen and (max-width: 768px){
+            .main_body{
+                 margin: 5px;
+            }
+        }
+    </style>
+{% endblock %}
+{% load static %}
+{% block body %}
+    {% include 'navBar.html' %}
+    <div style=" background-image: url({% static 'images/doc-pat-ed.jpg' %});margin-top:0px; min-height: 90%; width: 100%; background-size: cover; background-attachment: fixed; background-position: center center;">
+    <div class="main_body center" style="background-color: #FFFDE0; padding:10px; opacity: 0.9">
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color: green; font-weight:500;">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        <div class="row" style="">
+        {% if bookings %}
+        <div class="col s12">
+        <!--ul class="tabs">
+            <li class="tab col s4"><a href="#previous">Previous</a></li>
+            <li class="tab col s4"><a class="active" href="#today">Today</a></li>
+            <li class="tab col s4"><a href="#upcoming">Upcoming</a></li>
+        </ul-->
+        <div id="today active" class="s11" style="overflow-x: scroll;">
+            <table style="border: solid 3px green;" class = "">
+                <h5 style="color: green; font-weight:500; padding: 5px; background-color: #89CFF0;">Today's Appointments:</h5>
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Doctors's Name</th>
+                    <th>Doctor's Email</th>
+                    <th>City</th>
+                    <th>Specialist</th>
+                    <th>Booked for Date</th>
+                    <th>Time slot</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for k in bookings %}
+                    {% if k.booked_date == today %}
+                        {% if k.status == 'Attended' %}
+                        <tr style="text-decoration: line-through;">
+                        {% else %}
+                        <tr>
+                        {% endif %}
+                        <td>{{ k.id }}</td>
+                        <td>{{ k.doctor_name }}</td>
+                        <td>{{ k.doctor_email }}</td>
+                        <td>{{ k.city }}</td>
+                        <td>{{ k.specialization }}</td>
+                        <td>{{ k.booked_date }}</td>
+                        <td>{{ k.booked_time }}</td>
+                        <td>{{ k.status }}</td>
+                        <td><button class="btn modal-trigger" data-md-tooltip="Doctors Advice" data-target="{{k.id}}"><i class="large material-icons large">description</i></button></td>
+                        <td><button class="btn modal-trigger orange" data-md-tooltip="Delete"><i class="large material-icons large">delete_forever</i></button></td>
+                    </tr>
+                    <div id="{{k.id}}" class="modal">
+                        <div class="modal-content">
+
+                            {% if k.status == 'Pending' %}
+                                <span style="font-size:15;">Status: <span style="color: orange;">{{ k.status }}</span></span>
+                            {% else %}
+                                <span style="font-size:15;">Status: <span style="color: green;">{{ k.status }}</span></span>
+                            {% endif %}
+                            <h4>Doctor's Advice:</h4>
+                            <h5>{{ k.doctors_advice }}</h5>
+                        </div>
+                        <div class="modal-footer">
+                          <a class="modal-action modal-close btn deep-orange darken-2">Close</a>
+                        </div>
+                    </div>
+
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="upcoming" class="s11" style="overflow-x: scroll;">
+            <table class = "">
+                <h5 style="font-weight:500; padding: 5px; background-color: #89CFF0;">Upcoming:</h5>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Doctors's Name</th>
+                    <th>Doctor's Email</th>
+                    <th>City</th>
+                    <th>Specialist</th>
+                    <th>Booked for Date</th>
+                    <th>Time slot</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for k in bookings %}
+                    {% if k.booked_date > today %}
+                    <tr>
+                        <td>{{ k.id }}</td>
+                        <td>{{ k.doctor_name }}</td>
+                        <td>{{ k.doctor_email }}</td>
+                        <td>{{ k.city }}</td>
+                        <td>{{ k.specialization }}</td>
+                        <td>{{ k.booked_date }}</td>
+                        <td>{{ k.booked_time }}</td>
+                        <td><a  class="btn modal-trigger orange" data-target="{{k.id}}del" data-md-tooltip="Delete"><i class="large material-icons">delete_forever</i></a></td>
+
+                    </tr>
+                        <div id="{{k.id}}del" class="modal">
+                                <div class="modal-content">
+                                    <span><h5>Are you sure, you want to delete this Appointment ?</h5></span>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="modal-action modal-close btn deep-orange darken-2">No</a>
+                                    <a href="{% url 'bookings:delete_appointment' k.id %}" class="modal-action modal-close btn teal darken-2">Yes</a>
+                                </div>
+                         </div>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        <div id="previous" class="s11" style="overflow-x: scroll;">
+            <table class = "" style="min-width: 100px;">
+                <h5 style="font-weight:500; padding: 5px; background-color: #89CFF0;">Previous Bookings:</h5>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Doctors's Name</th>
+                    <th>Doctor's Email</th>
+                    <th>City</th>
+                    <th>Specialist</th>
+                    <th>Booked for Date</th>
+                    <th>Time slot</th>
+
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for k in bookings reversed%}
+                    {% if k.booked_date < today %}
+                        {% if k.status != 'Pending' %}
+                        <tr style="text-decoration: line-through;">
+                        {% else %}
+                        <tr>
+                        {% endif %}
+
+                        <td>{{ k.id }}</td>
+                        <td>{{ k.doctor_name }}</td>
+                        <td>{{ k.doctor_email }}</td>
+                        <td>{{ k.city }}</td>
+                        <td>{{ k.specialization }}</td>
+                        <td>{{ k.booked_date }}</td>
+                        <td>{{ k.booked_time }}</td>
+
+                        <td><button class="btn modal-trigger" data-target="p{{k.id}}"><i class="large material-icons large">description</i></button></td>
+
+                    </tr>
+                    <div id="p{{k.id}}" class="modal" style="background-color: #90caf9;">
+                        <div class="modal-content">
+
+                            {% if k.status == 'Pending' %}
+                                <span style="font-size:15;">Status: <span style="color: orange;">{{ k.status }}</span></span>
+                            {% else %}
+                                <span style="font-size:15;">Status: <span style="color: green;">{{ k.status }}</span></span>
+                            {% endif %}
+                            <h4>Doctor's Advice:</h4>
+                            <h5>{{ k.doctors_advice }}</h5>
+                        </div>
+                        <div class="modal-footer">
+                          <a class="modal-action modal-close btn deep-orange darken-2">Close</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+        {% else %}
+            <h5 class="center">You haven't booked any appointment!!</h5>
+        {% endif %}
+
+    </div>
+    </div>
+    </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('select').formSelect();
+        $('.modal').modal();
+    });
+
+</script>
+{% endblock %}

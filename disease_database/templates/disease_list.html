@@ -1,0 +1,70 @@
+<style>
+    .buttonContainer span{
+            font-size: 15px;
+            padding-top: 6px;
+     }
+     @media only screen and (max-width: 760px){
+        .buttonContainer{
+            margin: 10px 0px;
+        }
+        .buttonContainer span{
+            padding-top: 9px;
+            font-size: 10px;
+        }
+        h5{
+            font-size: 1.4rem;
+        }
+     }
+</style>
+<div class="disease-info">
+    {% if disease %}
+    <div class="tabContainer ">
+        <h5 style="font-weight: 800; margin: 0px; color: teal;">{{disease.disease_name}}</h5>
+        <div class="buttonContainer z-depth-2">
+            <span class="center" onclick="showPanel(0)">Preview</span>
+            <span class="center" onclick="showPanel(1)">Symptoms</span>
+            <span class="center" onclick="showPanel(2)">Prevention</span>
+            <span class="center" onclick="showPanel(3)">Treatment</span>
+        </div>
+        <div class="tabPanel z-depth-2">
+            <i style="font-size:22; color:black;">Preview:</i>
+            {{disease.preview}}
+        </div>
+        <div class="tabPanel z-depth-2">
+            <i style="font-size:22; color:black;">Symptoms:</i>
+            {{disease.symptoms}}
+        </div>
+        <div class="tabPanel z-depth-2">
+            <i style="font-size:22; color:black;">Prevention:</i>
+            {{disease.prevention}}
+        </div>
+        <div class="tabPanel z-depth-2">
+            <i style="font-size:22; color:black;">Treatment:</i>
+            {{disease.treatment}}
+        </div>
+    </div>
+
+    <script>
+        var tabButton = document.querySelectorAll(".tabContainer .buttonContainer span");
+        var tabPanel = document.querySelectorAll(".tabContainer .tabPanel");
+
+        function showPanel(tabIndex){
+            tabButton.forEach(function(node){
+                node.style.backgroundColor="";
+                node.style.color="";
+            });
+            tabButton[tabIndex].style.backgroundColor="teal";
+            tabButton[tabIndex].style.color="white";
+            tabPanel.forEach(function(node){
+                node.style.display="none";
+            });
+            tabPanel[tabIndex].style.display="block";
+        }
+        showPanel(0)
+    </script>
+    {% else %}
+        <div align="middle" style="margin-top:100px;">
+            <h5><i>Disease Doesn't Exist !!</i></h5>
+        </div>
+    {% endif %}
+</div>

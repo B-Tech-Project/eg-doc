@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    <title>Doctor | Appointments</title>
+{% endblock %}
+{% load static %}
+{% block body %}
+    {% include 'navBar.html' %}
+    <div style=" background-image: url({% static 'images/doc-pat-ed.jpg' %});margin-top:0px; min-height: 90%; width: 100%; background-size: cover; background-attachment: fixed; background-position: center center;">
+        <div class="container white" style="padding: 30px;">
+            <center>
+            <h5>Modify Appointment Details:</h5>
+            <form method="post" target="">
+
+                {% csrf_token %}
+                <div class="">
+                    <div class="">
+                        <div class="" style="width: 100px;">
+                            <label for="id_status">Status:</label>
+                            {{modify_form.status}}
+                        </div>
+                        <div class="" style="height: 100px; width: 500px;">
+                            <label for="id_sdoctors_advice">Your's Advice::</label>
+                            {{modify_form.doctors_advice}}
+                        </div>
+                    </div>
+                </div>
+                <input  class="btn" type="submit" style="margin: 30px;" name="submit">
+            </form>
+                </center>
+        </div>
+    </div>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('select').formSelect();
+        $('.modal').modal();
+    });
+
+
+</script>
+{% endblock %}

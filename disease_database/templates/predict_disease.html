@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Patient | Predict Disease</title>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    <style type="text/css">
+        .tabContainer {
+            margin: 20px;
+        }
+        .tabContainer .buttonContainer{
+            margin: 10px;
+            width: 90%;
+            border-radius: 20px;
+            height: 40px;
+            background-color: white;
+        }
+        .tabContainer .buttonContainer span{
+            font-weight:700;
+            width: 25%;
+            height: 100%;
+            float: left;
+            border-radius: 20px;
+            cursor: pointer;
+            position:center;
+        }
+        .tabContainer .buttonContainer span:hover{
+            border:solid 1px teal;
+            color: teal;
+        }
+        .tabContainer .tabPanel{
+            min-height: 50%;
+            color: teal;
+            padding: 20px;
+            font-size: 20px;
+            font-weight: 500;
+            border-radius: 20px;
+            background-color: white;
+            display: none;
+        }
+        .button-02{
+            font-size: 18px;
+        }
+        .heading-02{
+            font-size: 22px;
+        }
+        .tabContainer .search-disease-bar{
+            margin: 20px;
+        }
+
+        @media only screen and (max-width: 760px){
+            .heading-02{
+                font-size: 15px;
+            }
+            .button-02,.disease_info_btn{
+                font-size: 10px;
+            }
+            .box-1, .box-2{
+                border-radius: 20px;
+            }
+            .tabContainer, .search-disease-bar, .buttonContainer{
+                margin: 5px;
+            }
+            #addButton{
+                margin-left: 35%;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% load static %}
+{% block body %}
+    {% include 'navBar.html' %}
+<div style=" background-image: url({% static 'images/doc-pat-ed.jpg' %}); width: 100%; background-size: cover; background-attachment: fixed; background-position: center center;">
+    <div id="click_body" class="row" style="margin-right:15px;">
+    <div class="box-1 container z-depth-4 col m7 s11" style=" padding: 40px; min-height:80%; border-top-left-radius: 30px; border-bottom-left-radius: 30px; background-color: #90caf9; margin:5px 0px 50px 30px;">
+        <div class="row">
+            {% csrf_token %}
+             <div class="col s12 m6" style="background-color: rgba(14, 77, 146, 0.6); min-height: 100px; padding:20px; margin: 0px 10px 10px 0px;">
+                <div class="">
+                    <header style="color: white;">Enter your symptoms here: (Add atleast 2 symptoms)</header>
+                    <form id="searchForm" class="row" >
+                      <div class="autocomplete col s10">
+                          <input id="symptom" autocomplete="off" style="background-color: #90caf9; border-radius: 10px; border: 1.5px solid navy; height: 35px; padding: 10px 20px 5px 25px; margin: 0px;" class="col s9"  type="search" placeholder="Type atleast two characters...">
+                      </div>
+                        <a class="btn-floating red center" style="margin-top:7px;" id="addButton">Add</a>
+                    </form>
+                  </div>
+             </div>
+             <div class="col s12 m5" style="background-color: rgba(14, 77, 146, 0.6); min-height: 150px;">
+                <header  style="color: white;">Your Symptoms:</header>
+                <div class="wrapper" style="padding: 6px; min-height: 60px; border: .5px solid white; width: 100%;">
+                    <div id="chipp" class="chipp">
+                    </div>
+                </div>
+                <div class="center">
+                    <button class="button-02 waves-effect waves-light btn left" style="height: 45px; font-weight: 600; margin: 20px;" id="search_submit">Get Prediction Result</button>
+                </div>
+             </div>
+         </div>
+         <div class="z-depth-2" style="background-color:rgba(14, 77, 146, 1); padding: 30px; min-height: 100px; ">
+             <header class="heading-02" style="color: white;">Conditions that match your symptoms:</header>
+             <div id="prediction_results">
+             </div>
+         </div>
+        </div>
+
+
+         <div class="box-2 z-depth-4 col m4 s11" style="background-color: #eeeeee; margin: 5px 5px 5px 15px; min-height: 80%; border-top-right-radius: 30px; border-bottom-right-radius: 30px;">
+            <div class="search-disease-bar z-depth-2 input-field" style="background-color: #90caf9; width:100%; padding:3px 15px 0px 15px; border-radius: 20px;">
+
+                <input type="text" id="disease_select" placeholder="Search Disease" style="width: 60%; height: 32px;" list="diseaseList" class="autocomplete">
+                <span name="disease_info_btn" class="btn disease_info_btn z-depth-0" style="border-radius:20px;">Search</span>
+                <datalist id="diseaseList">
+                    {% for disease in disease_list %}
+                        <option id="{{disease}}" value="{{disease}}">{{disease}}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
+             <div id="disease-info">
+                <div align="middle" style="margin-top:100px;">
+                    <h5><i>Disease Not selected !!</i></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+var nav_trigger = document.getElementById('side-menu-trigger');
+var side_menu = document.getElementById('mobile-demo');
+nav_trigger.addEventListener('click', trigger_sidenav);
+function trigger_sidenav(){
+    side_menu.style.transform= "translateX(0%)";
+}
+
+var click_body = document.getElementById('click_body');
+click_body.addEventListener('click', close_sidenav);
+function close_sidenav(){
+    side_menu.style.transform= "translateX(-105%)";
+}
+
+$(function() {
+    var symptoms = [
+        {% for symptom in symptom_list %}
+        "{{ symptom }}",
+        {% endfor %}
+    ]
+
+    $("#symptom").autocomplete({
+        source: function(request, response){
+         var results = $.ui.autocomplete.filter(symptoms, request.term);
+         response(results.slice(0,10));
+         }
+    });
+});
+
+
+</script>
+<script src="{% static 'js/prediction_script.js' %}"></script>
+{% block sidenav %}
+    <script type="text/javascript">
+
+  </script>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% endblock %}

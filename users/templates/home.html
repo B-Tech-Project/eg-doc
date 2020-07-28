@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>home</title>
+{% endblock %}
+{% load static %}
+{% block body %}
+    {% include 'navBar.html' %}
+    <div class="home-page"
+    style=" background-image: url({% static 'images/doc-pat-ed.jpg' %}); width: 100%; background-size: cover; background-attachment: fixed; background-position: center center;">
+    <div  style="background-image: linear-gradient(to right, rgba(0,0,0,0),rgba(0,0,0,0),  rgba(9, 1, 124, 0.842));">
+      <div class="row" style="padding-top:20px;">
+
+        <div class="col s10 m3 card small z-depth-3 right login-background-mobile"
+          style="height: auto; margin: 30px 30px 30px 30px; border-radius: 15px; background-image: linear-gradient(to right,#004d70, blue); background-color: #1a237e;">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="messages center" style="min-height:30px; border-radius:7px; ">
+                <span class="{{ message.tags }}" style="background-color: white; font-size: 13px; color: red; padding: 10px 10px;"> {{ message }}</span></div>
+            {% endfor %}
+            {% endif %}
+          <form method="POST" id="loginForm" target="" autocomplete="off">
+            {% csrf_token %}
+            <div class="col s12">
+              <div class="heading center" style="margin-bottom: 20px;">
+                <h5 style=" color: rgb(255, 255, 255); font-weight: 600;">Login for Doctor/Patient</h5>
+
+              </div>
+              <div class="input-field col s12" style="margin-top: 0px;">
+                <label for="emailLog" style="color: grey;">Email</label>
+                <input id="emailLog" type="email" name="email" style="color: white;">
+                  <span class="helper-text"></span>
+              </div>
+              <div class="input-field col s12" style="margin-top: 0px;">
+                <label for="passwordLog" style="color: grey; padding-top: 0px; ">Password</label>
+                <input id="passwordLog" type="password" name="password" style="color: white;">
+                  <span class="helper-text"></span>
+              </div>
+                <div class="center">
+                    <input class="z-depth-2"
+                        style="font-weight: 600; color: white; border: 0px; border-radius:18px; width: 70%; height:35px; margin: 10px 30px 30px 20px; background-image: linear-gradient(to right,#008080 ,rgb(12, 0, 179));" type="submit" value="Login">
+                </div>
+            </div>
+          </form>
+        </div>
+        <div class="col s10 m7 left" style="height:400px; margin:30px 0px 0px 40px;">
+          <rssapp-carousel id="55ZRwHRa8c56EFfS"></rssapp-carousel><script src="https://widget.rss.app/v1/carousel.js" type="text/javascript" async></script>
+        </div>
+
+      </div>
+      <div class="row" style="width: 100%; padding: 10px 20px 30px 20px; height: auto; background-color: rgba(243, 243, 243, 0.7);">
+        <div class="container">
+          <div class="col s12 m6">
+            <div class="center">
+              <h6 class="center">To register as a Patient </h6>
+              <a href="{% url 'users:patient_registration' %}" class="waves-effect waves-light z-depth-2"
+                style="padding: 3px; border-style:solid; color: rgb(0, 0, 0); border-color: #008080; border-radius:16px; background-color: transparent; width: 60%; margin: 10px; font-size: medium; font-weight: 500;">CLICK HERE</a>
+            </div>
+          </div>
+          <div class="col s12 m6">
+            <div class="center">
+            <h6>To register as a Doctor </h6>
+            <a href="{% url 'users:doctor_registration' %}" class="waves-effect waves-light z-depth-2"
+              style="padding: 3px; border-style:solid; color: rgb(0, 0, 0); border-color: #02058d; border-radius:16px; background-color: transparent; width: 60%; margin: 10px; font-size: medium; font-weight: 500;">CLICK HERE</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+</div>
+<script src="{% static 'js/login_script.js' %}"></script>
+{% endblock %}

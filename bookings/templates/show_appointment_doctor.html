@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    <title>Doctor | Appointments</title>
+    <style type="text/css">
+        .main_body{
+             margin:0px 50px 10px 50px;
+        }
+        @media only screen and (max-width: 768px){
+            .main_body{
+                 margin: 5px;
+            }
+        }
+    </style>
+{% endblock %}
+{% load static %}
+{% block body %}
+    {% include 'navBar.html' %}
+    <div style=" background-image: url({% static 'images/doc-pat-ed.jpg' %});margin-top:0px; min-height: 90%; width: 100%; background-size: cover; background-attachment: fixed; background-position: center center;">
+    <div class="main_body center white" style="padding:10px;">
+        <h4>Booked Appointments:</h4>
+        {% if bookings %}
+            <div class="s11" style="overflow-x: scroll">
+            <table style="border: solid 3px green;" >
+                <h5 style="color: green; font-weight:500; padding:4px; background-color: #89CFF0;">Appointments for Today:</h5>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient's Name</th>
+                    <th>Patient's Email</th>
+                    <th>Patient's Age</th>
+                    <th>Booked for Date</th>
+                    <th>Time:</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for k in bookings %}
+                    {% if k.booked_date == today %}
+                    {% if k.status == 'Attended' %}
+                        <tr style="text-decoration: line-through;">
+                        {% else %}
+                        <tr>
+                        {% endif %}
+                        <td>{{ k.id }}</td>
+                        <td>{{ k.patient_name }}</td>
+                        <td>{{ k.patient_email }}</td>
+                        <td>{{ k.patient_age }}</td>
+                        <td>{{ k.booked_date }}</td>
+                        <td>{{ k.booked_time }}</td>
+                        <td>{{ k.status }}</td>
+                        <td><a href="{% url 'bookings:modify_appointment_doctor' k.id %}" class="btn" id="{{k.id}}"><i class="material-icons">create</i></a></td>
+                    </tr>
+
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+
+            <div class="s11" style="overflow-x: scroll">
+            <table class = "striped bordered">
+                <h5 style="font-weight:500; padding:4px; background-color: #89CFF0;" >Upcoming Appointments:</h5>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient's Name</th>
+                    <th>Patient's Email</th>
+                    <th>Patient's Age</th>
+                    <th>Booked for Date</th>
+                    <th>Time:</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for k in bookings %}
+                    {% if k.booked_date > today %}
+                    <tr>
+                        <td>{{ k.id }}</td>
+                        <td>{{ k.patient_name }}</td>
+                        <td>{{ k.patient_email }}</td>
+                        <td>{{ k.patient_age }}</td>
+                        <td>{{ k.booked_date }}</td>
+                        <td>{{ k.booked_time }}</td>
+                        <td>{{ k.status }}</td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            <div style="overflow-x: scroll">
+            <table class = "striped bordered">
+                <h5 style="font-weight:500; padding:4px; background-color: #89CFF0;">Previous Appointments:</h5>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient's Name</th>
+                    <th>Patient's Email</th>
+                    <th>Patient's Age</th>
+                    <th>Booked for Date</th>
+                    <th>Time:</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for k in bookings reversed %}
+                    {% if k.booked_date < today %}
+                        {% if k.status == 'Attended' %}
+                        <tr style="text-decoration: line-through;">
+                        {% else %}
+                        <tr>
+                        {% endif %}
+                        <td>{{ k.id }}</td>
+                        <td>{{ k.patient_name }}</td>
+                        <td>{{ k.patient_email }}</td>
+                        <td>{{ k.patient_age }}</td>
+                        <td>{{ k.booked_date }}</td>
+                        <td>{{ k.booked_time }}</td>
+                        <td>{{ k.status }}</td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% else %}
+            <h5 class="center">No Appointments are made for you!!</h5>
+        {% endif %}
+    </div>
+    </div>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('select').formSelect();
+        $('.modal').modal();
+    });
+
+
+</script>
+{% endblock %}

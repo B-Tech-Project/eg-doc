@@ -1,0 +1,134 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Prompt">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href = "https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css"rel = "stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    {% block title %}
+    {% endblock %}
+    <style type="text/css">
+        .brand-logo{
+            font-size: 1.1rem;
+        }
+        .sidenav{
+            background-color: teal;
+            height: 70%;
+        }
+        body{
+            font-family: Prompt;
+        }
+        .activeLink{
+        background-color: grey;
+            height:60px;
+            margin-top: 4px;
+            border-bottom: solid 5px blue;
+        }
+        li a{
+            font-size: 20px;
+        }
+        #id_doctors_advice{
+            height: 100px;
+        }
+        ui-datepicker {font-size:64%; }
+        ::-webkit-input-placeholder { /* WebKit browsers */
+                color: black;
+                opacity: 1;
+                font-style: italic;
+
+            placeholder{
+                color:   white;
+            }
+            .deleteButton{
+                padding:5px 5px 5px 13px; cursor: pointer;
+            }
+            .chip{
+                font-weight: 700;
+                font-size: 15px;
+                background-color: rgba(255, 255, 255, 0.986);
+            }
+            header{
+                font-size: 15px;
+                font-weight: 500;
+                color: white;
+            }
+            .btn-floating{
+                font-size: 13px;
+                margin: 5px 2px 2px 5px;
+            }
+            .diseaseCard{
+                background-color: rgba(245, 245, 245, 0.534);
+                padding: 5px 50px;
+                margin: 10px 20px;
+                width: 80%;
+            }
+        .error{
+            color: red;
+            font-size: 13px;
+        }
+        .success{
+            color: green;
+        }
+        .helper-text{
+            font-style: italic;
+        }
+
+        .loader{
+        background: white;
+
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+        display: block;
+        opacity: 0.5;
+        justify-content: center;
+        align-items: center;
+      }
+      .loader > div{
+        margin-top: 200px;
+        width: 60%;
+      }
+      .loader.hidden{
+        animation: fadeOut 1s;
+        animation-fill-mode: forwards;
+      }
+      @keyframes fadeOut{
+        100% {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+      .collapsible-header {
+        font-weight:500;
+      }
+      input:disabled {
+        color: black;
+      }
+    </style>
+</head>
+<body style="">
+
+    <div class="loader hidden" style="height:100%; display:none; z-index:-1;" id="loader"></div>
+    {% block body %}
+    {% endblock %}
+
+    {% block sidenav %}
+        <script type="text/javascript">
+           $(document).ready(function(){
+                $('.sidenav').sidenav();
+             });
+        </script>
+    {% endblock %}
+
+    {% block footer %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    {% endblock %}
+    <script src="{% static 'js/loader.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% load i18n %}
+<div class="navbar-fixed">
+ <nav class="" style="background-color:#008080; margin-bottom: 3px;">
+    <div class="nav-wrapper" style="margin-right: 20px; margin-left: 30px;">
+        <a class="brand-logo left">EDP & ABS</a>
+        <a id="side-menu-trigger" href="#"style="font-size:25px;" data-target="mobile-demo" class="sidenav-trigger right">&#9776;</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a style="color: red; font-weight:600; display: flex;" href="{% url 'disease_database:covid19' %}" {% if request.path == '/diseases/covid-19/'%} class="activeLink" {% endif %} class="left"><i class="material-icons">warning</i>CoVid-19</a></li>
+          {% if user.is_authenticated %}
+
+            {% if user.is_patient %}
+                <li><a style="display: flex;" href="{% url 'disease_database:search' %}"  {% if request.path == '/diseases/prediction/' %} class="activeLink" {% endif %}><i class="tiny material-icons ">search</i> Disease Prediction</a></li>
+                <li><a style="display: flex;" href="{% url 'bookings:conform_booking' %}"{% if request.path == '/bookings/' %} class="activeLink" {% endif %}><i class="material-icons ">add_box</i> Book Appointment</a></li>
+                <li><a style="display: flex;" href="{% url 'bookings:show_appointment_patient' %}"{% if request.path == '/bookings/patient/' %} class="activeLink" {% endif %}><i class="material-icons ">book </i> My Bookings</a></li>
+
+                <li><a style="display: flex; color: navy; font-weight:600; font-style: italic;" href="{% url 'users:profile' %}"{% if request.path == '/accounts/profile/' %} class="activeLink" {% endif %}><i class="material-icons">person</i>{{ request.user.name }}</a></li>
+            {% elif user.is_doctor %}
+                <li><a style="display: flex;" href="{% url 'bookings:show_appointment_doctor' %}"{% if request.path == '/bookings/doctor/' %} class="activeLink" {% endif %}><i class="material-icons ">book</i >My Appointments</a></li>
+                <li style="width:100px;"></li>
+                <li><a style="font-weight:600; color: navy; display: flex; font-style: italic;" href="{% url 'users:profile' %}"{% if request.path == '/accounts/profile/' %} class="activeLink" {% endif %}><i class="material-icons">person</i>{{ request.user.name }}</a></li>
+            {% else %}
+
+            {% endif %}
+
+            <li><a style="font-weight:600; font-style: bold; color:red; display: flex;" href="{% url 'users:logout' %}"><i class="tiny material-icons ">power_settings_new </i> Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'users:login' %}" {% if request.path == '/accounts/login/' %} class="activeLink" {% endif %}>Login</a></li>
+          {% endif %}
+      </ul>
+    </div>
+  </nav>
+</div>
+<ul class="sidenav" id="mobile-demo">
+    <li><a style="color: red; font-weight:600; display: flex;" href="{% url 'disease_database:covid19' %}"><i class="material-icons red-text">warning</i>CoVid-19</a></li>
+          {% if user.is_authenticated %}
+            {% if user.is_patient %}
+                <li><a style="font-weight:600; color: #2196f3; font-style: italic;" href="{% url 'users:profile' %}"{% if request.path == '/accounts/profile/' %} class="activeLink" {% endif %}><i class="material-icons blue-text">person</i>{{ request.user.name }}</a></li>
+                <li><a href="{% url 'disease_database:search' %}"{% if request.path == '/prediction/' %} class="activeLink" {% endif %}><i class="material-icons ">search</i>Disease Prediction</a></li>
+                <li><a href="{% url 'bookings:conform_booking' %}"{% if request.path == '/bookings/' %} class="activeLink" {% endif %}><i class="material-icons ">add_box</i>New Appointment</a></li>
+                <li><a href="{% url 'bookings:show_appointment_patient' %}"{% if request.path == '/bookings/patient/' %} class="activeLink" {% endif %}><i class="material-icons ">book</i>My Bookings</a></li>
+            {% elif user.is_doctor %}
+                <li><a style="font-weight:600;  color: #2196f3; font-style: italic;" href="{% url 'users:profile' %}"{% if request.path == '/accounts/profile/' %} class="activeLink" {% endif %}><i class="material-icons blue-text">person</i>{{ request.user.name }}</a></li>
+                <li><a href="{% url 'bookings:show_appointment_doctor' %}"{% if request.path == '/bookings/doctor/' %} class="activeLink" {% endif %}><i class="material-icons ">add_box</i>My Appointments</a></li>
+            {% else %}
+
+            {% endif %}
+
+            <li><a style="font-weight:600; font-style: bold; color:red;" href="{% url 'users:logout' %}"><i class="material-icons red-text">power_settings_new</i>Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'users:login' %}"{% if request.path == '/accounts/login/' %} class="activeLink" {% endif %}>Login</a></li>
+          {% endif %}
+      </ul>

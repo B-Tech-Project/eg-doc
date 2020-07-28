@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Doctor | Update Profile</title>
+{% endblock %}
+{% load static %}
+{% block body %}
+    {% include 'navBar.html' %}
+    <div class="container">
+        <h4>Doctor profile update</h4>
+        <form method="post" id="ProfileUpdateForm">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col s5">
+                    Name: {{ update_user_form.name }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s5">
+                    Phone no: {{ update_user_form.phone_number }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s10">
+                    Address:  {{update_user_form.address}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s5">
+                    City: {{update_user_form.city}}
+                </div>
+                <div class="col s5">
+                    Pincode: {{update_user_form.pin}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s5">
+                    State: {{update_user_form.state}}
+                </div>
+                <div class="col s5">
+                    Specialization: {{ update_doctor_form.specialization }}
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light blue" type="submit">SAVE UPDATE</button>
+        </form>
+    </div>
+<script src="{% static 'js/update_profile_script.js' %}"></script>
+{% endblock %}

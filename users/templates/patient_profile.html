@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Patient | Profile</title>
+{% endblock %}
+{% load static %}
+{% block body %}
+    {% include 'navBar.html' %}
+    <div style=" background-image: url({% static 'images/doc-pat-ed.jpg' %}); width: 100%; height:90%; background-size: cover; background-attachment: fixed; background-position: center center;">
+
+    <div class="container row">
+        <div class="col m3 s12 right">
+            <div class="container center" style="padding-top:30px;">
+                <a class="btn waves-effect waves-light blue" href="{% url 'users:Pupdateprofile' %}" style="margin:8px;">Edit Profile</a>
+                <a class="btn l waves-effect waves-light blue" href="{% url 'users:ChangePassword' %}" style="margin:8px; width:180px;">Change Password</a>
+            </div>
+        </div>
+        <div class="card col m9 s12" style="padding:10px; margin-top:20px;">
+            <h4 style="font-style:bold; color:blue; font-weight:600;">Patient Profile:</h4>
+            <hr>
+            <div class="container">
+                <label style="font-size:15px;" for="id_name">Name:</label>
+                <blockquote style="margin-top:0px; font-weight: 500; font-size:20px;">{{ user.name }}</blockquote>
+                <label style="font-size:15px;" for="id_email">Email:</label>
+                <blockquote style="margin-top:0px; font-weight: 500; font-size:20px;">{{ user.email }}</blockquote>
+                <label style="font-size:15px;" for="id_phone_number">Phone no:</label>
+                <blockquote style="margin-top:0px; font-weight: 500; font-size:20px;">{{ user.phone_number }}</blockquote>
+                <label style="font-size:15px;" for="id_address">Address:</label>
+                <blockquote style="margin-top:0px; font-weight: 500; font-size:20px;">{{user.address}}</blockquote>
+                <label style="font-size:15px;" for="id_city">City:</label>
+                <blockquote style="margin-top:0px; font-weight: 500; font-size:20px;">{{user.city}}</blockquote>
+                <label style="font-size:15px;" for="id_pin">Pin:</label>
+                <blockquote style="margin-top:0px; font-weight: 500; font-size:20px;">{{user.pin}}</blockquote>
+                <label style="font-size:15px;" for="id_state">State:</label>
+                <blockquote style="margin-top:0px; font-weight: 500; font-size:20px;">{{user.state}}</blockquote>
+                <label style="font-size:15px;" for="id_age">Age:</label>
+                <blockquote style="margin-top:0px; font-weight: 500; font-size:20px;">{{ user.patient_detail.age }}</blockquote>
+                <label style="font-size:15px;" for="id_gender">Gender:</label>
+                <blockquote style="margin-top:0px; font-weight: 500; font-size:20px;">{{ user.patient_detail.gender }}</blockquote>
+
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+
+{% endblock %}

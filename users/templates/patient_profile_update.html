@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Patient | Update Profile</title>
+{% endblock %}
+{% load static %}
+{% block body %}
+    {% include 'navBar.html' %}
+    <div class="container">
+        <h4>Patient profile update</h4>
+        <form method="post" id="ProfileUpdateForm">
+            {% csrf_token %}
+            Name:     {{ update_user_form.name }}
+            <br><br>
+            Phone no:     {{ update_user_form.phone_number }}
+            <br><br>
+            Address:  {{update_user_form.address}}
+            <br><br>
+            City: {{update_user_form.city}}
+            <br><br>
+            Pincode: {{update_user_form.pin}}
+            <br><br>
+            State: {{update_user_form.state}}
+            <br><br>
+            Age: {{ update_patient_form.age }}
+            <br><br>
+            Gender: {{ update_patient_form.gender }}
+
+            <button class="btn waves-effect waves-light blue" type="submit">SAVE UPDATE</button>
+        </form>
+    </div>
+<script src="{% static 'js/update_profile_script.js' %}"></script>
+{% endblock %}

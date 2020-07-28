@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    <title>Doctor | Registration</title>
+{% endblock %}
+{% load static %}
+{% block body %}
+    {% include 'navBar.html' %}
+    <div class="container">
+      <h4>Register as Doctor</h4>
+        {% if messages %}
+        {% for message in messages %}
+          <div class="messages center" style="min-height:40px; background-color:white; border-radius:7px; margin: 0px 200px 10px 200px;">
+            <span class="{{ message.tags }}"style="font-size: 20px; padding: 20px 50px;"> {{ message }}</span></div>
+        {% endfor %}
+        {% endif %}
+
+        {% if user_form.errors %}
+        {{ user_form.non_field_errors }}
+        {% for field in user_form %}
+            {% if field.errors %}
+                <div class="messages center" style="min-height:35px; border: 2px solid red; border-radius:7px; margin: 0px 100px 10px 100px;">
+                  <span style="font-size: 18px; padding: 20px 50px; color: red;">{{ field.errors|striptags }} ({{field.name}})</span></div>
+            {% endif %}
+        {% endfor %}
+      {% endif %}
+      {% if doctor_form.errors %}
+        {{ doctor_form.non_field_errors }}
+        {% for field in doctor_form %}
+            {% if field.errors %}
+                <div class="messages center" style="min-height:35px; border: 2px solid red; border-radius:7px; margin: 0px 100px 10px 100px;">
+                  <span style="font-size: 18px; padding: 20px 50px; color: red;">{{ field.errors|striptags }} ({{field.name}})</span></div>
+            {% endif %}
+        {% endfor %}
+      {% endif %}
+      <div id="success"></div>
+      <div class="row">
+        <form class="col s6" id="RegistrationForm" method="POST" target="" novalidate>
+          {% csrf_token %}
+          <div>
+            <div class="input-field">
+              <label for="id_name">Full Name</label>
+                {{ user_form.name }}
+              <span class="helper-text"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <label for="id_email">Email</label>
+              {{ user_form.email }}
+              <span class="helper-text"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <label for="id_phone_number">Phone no.</label>
+              {{ user_form.phone_number }}
+              <span class="helper-text"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <label for="id_password1">Password</label>
+              {{ user_form.password1 }}
+              <span class="helper-text"></span>
+            </div>
+            <div class="input-field col s6">
+              <label for="id_password2">Confirm Password</label>
+              {{ user_form.password2 }}
+              <span class="helper-text"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <label for="id_address">Local Address</label>
+              {{ user_form.address }}
+              <span class="helper-text"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s4">
+              <label for="id_city">City</label>
+              {{ user_form.city }}
+              <span class="helper-text"></span>
+            </div>
+            <div class="input-field col s3">
+              <label for="id_pin">Pin</label>
+              {{ user_form.pin }}
+              <span class="helper-text"></span>
+            </div>
+            <div class="input-field col s5">
+              <label for="id_state"></label>
+              {{ user_form.state }}
+              <span class="helper-text">Select State</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s6">
+              <label for="id_specialization"></label>
+              {{ doctor_form.specialization }}
+              <span class="helper-text">Select Specialization</span>
+            </div>
+          </div>
+
+          <div class="row">
+              <input class="col m4 z-depth-2" type="submit" value="Register" style="font-weight: 600; color: white; background-color: #008080; border:0px; border-radius:6px;  height:35px; margin: 10px 10px 30px 0px; ">
+            <a href="{% url 'users:login' %}" class="waves-effect waves-light col m4 center"  style="font-weight: 600; color: #008080; background-color: white; border:2px solid #008080; border-radius:6px; height:35px; margin: 10px 10px 30px 10px; padding: 5px;">Login Page</a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="{% static 'js/registration_script.js' %}"></script>
+{% endblock %}

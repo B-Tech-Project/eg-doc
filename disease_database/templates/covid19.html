@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Corona Virus</title>
+    <link rel = "stylesheet"
+         href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+{% endblock %}
+{% load static %}
+{% block body %}
+    {% include 'navBar.html' %}
+    <div style=" background-image: url({% static 'images/doc-pat-ed.jpg' %}); height: 100vh; background-size: cover; background-attachment: fixed; background-position: center center;">
+        <div class="row">
+            <div class="center col l4 s12" style="padding: 10px; color: black; ">
+                <div class="center" style=" padding: 0px;">
+                <div style="background-color:rgba(243, 243, 243, 0.9); border-radius: 10px; padding: 8px; margin-top: 0px; ">
+                    <a style="color: blue; font-size: 20px;" href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6" target="_blank">Global Infection Data --></a>
+                    <br>
+                </div>
+
+                <div class="main_box" style="background-color:rgba(243, 243, 243, 0.9);  padding: 5px 5px 20px 5px; border-radius: 15px; margin: 15px;">
+                    <div style="font-size: 20px; color: blue; font-weight: 600;" >Covid India Updates:</div>
+                    <div class="last_updated" style="color: grey; font-size: 12px;">Last Updated: </div>
+                    <div style="color:black; font-size: 18px;" class="total_cases">Total Cases:  </div>
+                    <div style="color: #4da2db; font-size: 18px;" class="active_cases">Active Cases:  </div>
+                    <div style="color: #138f40; font-size: 18px;" class="cured_cases">Cured Cases:  </div>
+                    <div style="color: #b51414; font-size: 18px;" class="death_cases">Death:  </div>
+
+                    <a style="color: blue; border-radius: 5px; border: 1px solid teal; font-size: 10px; padding: 4px 8px;" href="https://www.mygov.in/covid-19/">For more information--></a>
+                </div>
+                <div class="main_box" style="background-color:rgba(243, 243, 243, 0.9);  padding: 5px 5px 20px 5px; border-radius: 15px; margin: 15px;">
+                    <div style="font-size: 20px; color: blue; font-weight: 600;" >Covid Nepal Updates:</div>
+                    <div class="n_last_updated" style="color: grey; font-size: 12px;">Last Updated: </div>
+                    <div style="color:black; font-size: 18px;" class="n_total_cases">Total Cases:  </div>
+                    <div style="color: #4da2db; font-size: 18px;" class="n_active_cases">Active Cases:  </div>
+                    <div style="color: #138f40; font-size: 18px;" class="n_cured_cases">Cured Cases:  </div>
+                    <div style="color: #b51414; font-size: 18px;  margin-bottom: 5px;" class="n_death_cases">Death:  </div>
+                    <!--div style="color: #FF7043; font-size: 18px; margin-bottom: 5px;" class="migrated_cases">Migrated Cases:  </div-->
+                    <a style="color: blue; border-radius: 5px; border: 1px solid teal; font-size: 10px; padding: 4px 8px;" href="https://covid19.mohp.gov.np/#/">For more information--></a>
+                </div>
+                </div>
+            </div>
+            <div class="center col l8 s12" style="padding-top: 5%;">
+                <div class="row">
+                    <img style="" class="center col l6 s12" src="{% static 'images/symptoms.jpg' %}">
+                    <img style="" class="center col l6 s12" src="{% static 'images/prevention.jpg' %}">
+                </div>
+            </div>
+
+            <div class="center col m8 s12" style=" display: none; border-radius: 20px; background-color: white; margin-top:0px; padding:10px;">
+            <h5 style="margin-top:0px;">Q & A on Corona Viruses (COVID-19)</h5>
+              <ul class = "collapsible" data-collapsible = "accordion">
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>What is a coronavirus?</div>
+                    <div class = "collapsible-body"><p>Coronaviruses are a large family of viruses which may cause illness in animals or humans.&nbsp; In humans, several coronaviruses are known to cause respiratory infections ranging from the common cold to more severe diseases such as Middle East Respiratory Syndrome (MERS) and Severe Acute Respiratory Syndrome (SARS). The most recently discovered coronavirus causes coronavirus disease COVID-19.</p></div>
+                 </li>
+
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>What is COVID-19?</div>
+                    <div class = "collapsible-body"><p>COVID-19 is the infectious disease caused by the most recently discovered coronavirus. This new virus and disease were unknown before the outbreak began in Wuhan, China, in December 2019. </p></div>
+                 </li>
+
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>What are the symptoms of COVID-19?</div>
+
+                    <div class = "collapsible-body"><p><span style="background-color:initial;color:#313131;font-size:inherit;font-family:inherit;text-align:inherit;text-transform:inherit;white-space:inherit;word-spacing:normal;caret-color:auto;">The most common symptoms of COVID-19 are fever, tiredness, and dry cough. Some patients may have aches and pains, nasal congestion, runny nose, sore throat or diarrhea. These symptoms are usually mild and begin gradually. Some people become infected but don&rsquo;t develop any symptoms and don't feel unwell. Most people (about 80%) recover from the disease without needing special treatment. Around 1 out of every 6 people who gets COVID-19 becomes seriously ill and develops difficulty breathing. Older people, and those with underlying medical problems like high blood pressure, heart problems or diabetes, are more likely to develop serious illness. About 2% of people with the disease have died. People with fever, cough and difficulty breathing should seek medical attention.</span></p></div>
+                 </li>
+
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>How does COVID-19 spread?</div>
+                    <div class = "collapsible-body"><p>People can catch COVID-19 from others who have the virus. The disease can spread from person to person through small droplets from the nose or mouth which are spread when a person with COVID-19 coughs or exhales. These droplets land on objects and surfaces around the person. Other people then catch COVID-19 by touching these objects or surfaces, then touching their eyes, nose or mouth. People can also catch COVID-19 if they breathe in droplets from a person with COVID-19 who coughs out or exhales droplets. This is why it is important to stay more than 1 meter (3 feet) away from a person who is sick. </p><p>WHO is assessing ongoing research on the ways COVID-19 is spread and will continue to share updated findings.&nbsp;&nbsp;&nbsp;&nbsp;</p><div><h5><hr />Can the virus that causes COVID-19 be transmitted through the air?</h5></div><p>Studies to date suggest that the virus that causes COVID-19 is mainly transmitted through contact with respiratory droplets rather than through the air.&nbsp; See previous answer on &ldquo;How does COVID-19 spread?&rdquo;</p><div><h5><hr />Can CoVID-19 be caught from a person who has no symptoms?</h5></div><p>The main way the disease spreads is through respiratory droplets expelled by someone who is coughing. The risk of catching COVID-19 from someone with no symptoms at all is very low. However, many people with COVID-19 experience only mild symptoms. This is particularly true at the early stages of the disease. It is therefore possible to catch COVID-19 from someone who has, for example, just a mild cough and does not feel ill.&nbsp; WHO is assessing ongoing research on the period of transmission of COVID-19 and will continue to share updated findings.&nbsp;&nbsp;&nbsp;&nbsp;</p><div><h5><hr />Can I catch COVID-19 from the feces of someone with the disease?</h5></div><p>The risk of catching COVID-19 from the feces of an infected person appears to be low. While initial investigations suggest the virus may be present in feces in some cases, spread through this route is not a main feature of the outbreak. WHO is assessing ongoing research on the ways COVID-19 is spread and will continue to share new findings. Because this is a risk, however, it is another reason to clean hands regularly, after using the bathroom and before eating.&nbsp;</p></div>
+                 </li>
+
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i> What can I do to protect myself and prevent the&#160;spread of disease?</div>
+                    <div class = "collapsible-body"><h5>Protection measures for everyone</h5><p>Stay aware of the latest information on the COVID-19 outbreak, available on the WHO website and through your national and local public health authority. COVID-19 is still affecting mostly people in China with some outbreaks in other countries. Most people who become infected experience mild illness and recover, but it can be more severe for others. Take care of your health and protect others by doing the following:</p><ul><li>Regularly and thoroughly clean your hands with an alcohol-based hand rub or wash them with soap and water.<br />Why? Washing your hands with soap and water or using alcohol-based hand rub kills viruses that may be on your hands.</li><li>Maintain at least 1 metre (3 feet) distance between yourself and anyone who is coughing or sneezing.<br />Why? When someone coughs or sneezes they spray small liquid droplets from their nose or mouth which may contain virus. If you are too close, you can breathe in the droplets, including the COVID-19 virus if the person coughing has the disease.</li><li>Avoid touching eyes, nose and mouth.<br />Why? Hands touch many surfaces and can pick up viruses. Once contaminated, hands can transfer the virus to your eyes, nose or mouth. From there, the virus can enter your body and can make you sick.</li><li>Make sure you, and the people around you, follow good respiratory hygiene. This means covering your mouth and nose with your bent elbow or tissue when you cough or sneeze. Then dispose of the used tissue immediately.<br />Why? Droplets spread virus. By following good respiratory hygiene you protect the people around you from viruses such as cold, flu and COVID-19.</li><li>Stay home if you feel unwell. If you have a fever, cough and difficulty breathing, seek medical attention and call in advance. Follow the directions of your local health authority.<br />Why? National and local authorities will have the most up to date information on the situation in your area. Calling in advance will allow your health care provider to quickly direct you to the right health facility. This will also protect you and help prevent spread of viruses and other infections.</li><li>Stay informed on the latest developments about COVID-19. Follow advice given by your healthcare provider, your national and local public health authority or your employer on how to protect yourself and others from COVID-19.<br />Why? National and local authorities will have the most up to date information on whether COVID-19 is spreading in your area. They are best placed to advise on what people in your area should be doing to protect themselves.</li></ul><p></p><h5>Protection measures for persons who are in or have recently visited (past 14 days) areas where COVID-19 is spreading</h5><ul><li>Follow the guidance outlined above. (Protection measures for everyone)</li><li>Stay at home if you begin to feel unwell, even with mild symptoms such as headache and slight runny nose, until you recover.&nbsp;<br />Why? Avoiding contact with others and visits to medical facilities will allow these facilities to operate more effectively and help protect you and others from possible COVID-19 and other viruses.</li></ul><div style="text-align:left;"><br /></div><ul><li>If you develop fever, cough and difficulty breathing, seek medical advice promptly as this may be due to a respiratory infection or other serious condition. Call in advance and tell your provider of any recent travel or contact with travelers.&nbsp;<br />Why? Calling in advance will allow your health care provider to quickly direct you to the right health facility. This will also help to prevent possible spread of COVID-19 and other viruses.</li></ul><p>&nbsp;</p><p>&nbsp;</p><div><div><p>&nbsp;</p></div></div></div>
+                 </li>
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>How likely am I to catch COVID-19?</div>
+                    <div class = "collapsible-body"> <p>The risk depends on where you live or where you have travelled recently. The risk of infection is higher in areas where a number people have been diagnosed with COVID-19. More than 95% of all COVID-19 cases are occurring in China, with the majority of those in Hubei Province. For people in most other parts of the world, your risk of getting COVID-19 is currently low, however, it&rsquo;s important to be aware of the situation and preparedness efforts in your area.</p>
+                <p>WHO is working with health authorities in China and around the world to monitor and respond to COVID-19 outbreaks.&nbsp;</p></div>
+                 </li>
+
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>Should I worry about COVID-19?</div>
+                    <div class = "collapsible-body"><p>If you are not in an area where COVID-19 is spreading, or if you have not travelled from one of those areas or have not been in close contact with someone who has and is feeling unwell, your chances of getting it are currently low. However, it&rsquo;s understandable that you may feel stressed and anxious about the situation. It&rsquo;s a good idea to get the facts to help you accurately determine your risks so that you can take reasonable precautions. Your healthcare provider, your national public health authority and your employer are all potential sources of accurate information on COVID-19 and whether it is in your area. It is important to be informed of the situation where you live and take appropriate measures to protect yourself. (See&nbsp;Protection measures for everyone).</p><p>If you are in an area where there is an outbreak of COVID-19 you need to take the risk of infection seriously. Follow the advice issued by national and local health authorities. Although for most people COVID-19 causes only mild illness, it can make some people very ill. More rarely, the disease can be fatal. Older people, and those with pre-existing medical conditions (such as high blood pressure, heart problems or diabetes) appear to be more vulnerable. (See <a data-sf-ec-immutable="" href="file:///C:/Users/mirandat/AppData/Local/Microsoft/Windows/INetCache/Content.Outlook/T2LJW087/WHO%20FAQ%20-%20Feb%2023%20FINAL.docx#_Protection_measures_for_1"></a><a target="_blank" href="/emergencies/diseases/novel-coronavirus-2019/advice-for-public">Protection measures for persons who are in or have recently visited (past 14 days) areas where COVID-19 is spreading</a>).</p><p>&nbsp;</p></div>
+                 </li>
+
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>Who is at risk of developing severe illness?</div>
+                    <div class = "collapsible-body"><p>While we are still learning about how COVID-2019 affects people, older persons and persons with pre-existing medical conditions (such as high blood pressure, heart disease, or diabetes) appear to develop serious illness more often than others.&nbsp;</p></div>
+                 </li>
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i> Are antibiotics effective in preventing or treating the COVID-19?</div>
+                    <div class = "collapsible-body"><p>No. Antibiotics do not work against viruses, they only work on bacterial infections. COVID-19 is caused by a virus, so antibiotics do not work. Antibiotics should not be used as a means of prevention or treatment of COVID-19. They should only be used as directed by a physician to treat a bacterial infection.&nbsp;</p>
+                                    </p></div>
+                 </li>
+
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>Is there a vaccine, drug or treatment for COVID-19?</div>
+                    <div class = "collapsible-body"><p>Not yet. To date, there is no vaccine and no specific antiviral medicine to prevent or treat COVID-2019. However, those affected should receive care to relieve symptoms. People with serious illness should be hospitalized. Most patients recover thanks to supportive care. </p>
+            <p>Possible vaccines and some specific drug treatments are under investigation. They are being tested through clinical trials. WHO is coordinating efforts to develop vaccines and medicines to prevent and treat COVID-19. </p>
+            <p>The most effective ways to protect yourself and others against COVID-19 are to frequently clean your hands, cover your cough with the bend of elbow or tissue, and maintain a distance of at least 1 meter (3 feet) from people who are coughing or sneezing. For more information, see basic protective measures against the new coronavirus.</p></div>
+                 </li>
+
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>Is COVID-19 the same as SARS?</div>
+                    <div class = "collapsible-body"><p>No. The virus that causes COVID-19 and the one that causes Severe Acute Respiratory Syndrome (SARS) are related to each other genetically, but they are different. SARS is more deadly but much less infectious than COVID-19. There have been no outbreaks of SARS anywhere in the world since 2003.</p></div>
+                 </li>
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>Should I wear a mask to protect myself?</div>
+                    <div class = "collapsible-body"><p>People with no respiratory symptoms, such as cough, do not need to wear a medical mask. WHO recommends the use of masks for people who have symptoms of COVID-19 and for those caring for individuals who have symptoms, such as cough and fever. The use of masks is crucial for health workers and people who are taking care of someone (at home or in a health care facility).</p>
+            <p>WHO advises rational use of medical masks to avoid unnecessary wastage of precious resources and mis-use of masks (see  <a href="/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks" class="sf-immutable-selected" target="_blank">Advice on the use of masks</a>). Use a mask only if you have respiratory symptoms (coughing or sneezing), have suspected COVID-19 infection with mild symptoms, or are caring for someone with suspected COVID-19 infection. A suspected COVID-19 infection is linked to travel in areas where cases have been reported, or close contact with someone who has travelled in these areas and has become ill.</p>
+            <p>The most effective ways to protect yourself and others against COVID-19 are to frequently clean your hands, cover your cough with the bend of elbow or tissue and maintain a distance of at least 1 meter (3 feet) from people who are coughing or sneezing. For more information, see basic protective measures against the new coronavirus.</p></div>
+                 </li>
+
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>How to put on, use, take off and dispose of a mask?</div>
+                    <div class = "collapsible-body"><ol><li><span style="background-color:transparent;font-family:inherit;text-align:inherit;text-transform:inherit;white-space:inherit;word-spacing:normal;caret-color:auto;font-size:inherit;">Remember, a mask should only be used by health workers, care takers, and individuals with respiratory symptoms, such as fever and cough.</span></li><li>Before touching the mask, clean hands with an alcohol-based hand rub or soap and water</li><li>Take the mask and inspect it for tears or holes.</li><li>Orient which side is the top side (where the metal strip is).</li><li>Ensure the proper side of the mask faces outwards (the coloured side).</li><li>Place the mask to your face. Pinch the metal strip or stiff edge of the mask so it moulds to the shape of your nose.</li><li>Pull down the mask&rsquo;s bottom so it covers your mouth and your chin.</li><li>After use, take off the mask; remove the elastic loops from behind the ears while keeping the mask away from your face and clothes, to avoid touching potentially contaminated surfaces of the mask. </li><li>Discard the mask in a closed bin immediately after use.</li><li>Perform hand hygiene after touching or discarding the mask &ndash; Use alcohol-based hand rub or, if visibly soiled, wash your hands with soap and water.</li></ol></div>
+                 </li>
+
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>How long is the incubation period for COVID-19?</div>
+                    <div class = "collapsible-body"><p>The &ldquo;incubation period&rdquo; means the time between catching the virus and beginning to have symptoms of the disease. Most estimates of the incubation period for COVID-19 range from 1-14 days, most commonly around five days. These estimates will be updated as more data become available.</p></div>
+                 </li>
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>Can humans become infected with the COVID-19 from an animal source?</div>
+                    <div class = "collapsible-body"><p>Coronaviruses are a large family of viruses that are common in animals. Rarely, people get infected with these viruses which may then spread to other people. For example, SARS-CoV was associated with civet cats and MERS-CoV is transmitted by dromedary camels. Possible animal sources of COVID-19 have not yet been confirmed.&nbsp; </p>
+                    <p>To protect yourself, such as when visiting live animal markets, avoid direct contact with animals and surfaces in contact with animals. Ensure good food safety practices at all times. Handle raw meat, milk or animal organs with care to avoid contamination of uncooked foods and avoid consuming raw or undercooked animal products.</p></div>
+                 </li>
+
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i> Can I catch COVID-19 from my pet?</div>
+                    <div class = "collapsible-body"><p>No. There is no evidence that companion animals or pets such as cats and dogs have been infected or could spread the virus that causes COVID-19.</p></div>
+                 </li>
+
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>How long does the virus survive on surfaces?</div>
+                    <div class = "collapsible-body"><p></p><p>It is not certain how long the virus that causes COVID-19 survives on surfaces, but it seems to behave like other coronaviruses. Studies suggest that coronaviruses (including preliminary information on the COVID-19 virus) may persist on surfaces for a few hours or up to several days. This may vary under different conditions (e.g. type of surface, temperature or humidity of the environment).</p><p>If you think a surface may be infected, clean it with simple disinfectant to kill the virus and protect yourself and others. Clean your hands with an alcohol-based hand rub or wash them with soap and water. Avoid touching your eyes, mouth, or nose.</p><p></p></div>
+                 </li>
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>Is it safe to receive a package from any area where COVID-19 has been reported?</div>
+                    <div class = "collapsible-body"><p>Yes. The likelihood of an infected person contaminating commercial goods is low and the risk of catching the virus that causes COVID-19 from a package that has been moved, travelled, and exposed to different conditions and temperature is also low.&nbsp;</p><p></p></div>
+                 </li>
+
+                 <li>
+                    <div class = "collapsible-header">
+                       <i class = "material-icons">add</i>Is there anything I should not do?</div>
+                    <div class = "collapsible-body"><p>The following measures <strong><span style="text-decoration:underline;">ARE NOT</span></strong> effective against COVID-2019 and can be harmful:</p><ul><li>Smoking</li><li>Taking traditional herbal remedies </li><li>Wearing multiple masks </li><li>Taking self-medication such as antibiotics &nbsp;</li></ul><p><strong>In any case, if you have fever, cough and difficulty breathing seek medical care early</strong> to reduce the risk of developing a more severe infection and be sure to share your recent travel history with your health care provider.</p><p></p></div>
+                 </li>
+              </ul>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.collapsible').collapsible();
+        });
+        //India
+        //$.getJSON("https://api.apify.com/v2/key-value-stores/toDWvRj1JpTXiM8FF/records/LATEST?disableRedirect=true", function(data){
+        $.getJSON("https://covid19-api.org/api/status/IN", function(data){
+
+            /*
+            var total = data["totalCases"];
+            var cured = data["recovered"];
+            var active = data["activeCases"];
+            var death = data["deaths"];
+            var last_updated = data["lastUpdatedAtApify"];
+            console.log(data);
+            */
+
+            var total = data["cases"];
+            var cured = data["recovered"];
+            var death = data["deaths"];
+            var active = parseInt(total)-parseInt(cured)-parseInt(death);
+            var last_updated = data["last_update"];
+
+            $(".total_cases").append(total);
+            $(".cured_cases").append(cured);
+            $(".active_cases").append(active);
+            $(".death_cases").append(death);
+
+            $(".last_updated").append(last_updated);
+        });
+        //Nepal
+        $.getJSON("https://nepalcorona.info/api/v1/data/nepal", function(n_data){
+
+            var n_total = n_data["tested_positive"];
+            var n_cured = n_data["recovered"];
+            var n_active = n_data["in_isolation"];
+            var n_death = n_data["deaths"];
+            var n_last_updated = n_data["updated_at"];
+
+
+            $(".n_total_cases").append(n_total);
+            $(".n_cured_cases").append(n_cured);
+            $(".n_active_cases").append(n_active);
+            $(".n_death_cases").append(n_death);
+            $(".n_last_updated").append(n_last_updated);
+        })
+    </script>
+{% endblock %}
