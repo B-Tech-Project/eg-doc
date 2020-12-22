@@ -1,6 +1,11 @@
 # eg-doc
 
 Deployed Link: https://eg-doc.herokuapp.com
+# Included
+1. Datasets
+2. Documentation
+3. Screenshots
+
 
 # 1. Home and Login Page
 ![alt text](https://github.com/B-Tech-Project/eg-doc/blob/master/Screenshot%20Images/Picture9.png?raw=true)
