@@ -2,9 +2,9 @@
 
 Deployed Link: https://eg-doc.herokuapp.com
 # Included
-1. [Datasets]
-2. [Documentation](Documents)
-3. [Screenshots]
+1. [Datasets](Data%20Files)
+2. [Documentation](Documentation)
+3. [Screenshots](Screenshots)
 
 
 # 1. Home and Login Page
